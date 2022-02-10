@@ -20,7 +20,6 @@ function displayMovies() {
                 html += `<li>title: ${movie.title}</li><li>genre: ${movie.genre}</li><li>director: ${movie.director}</li><li>actors: ${movie.actors}</li>
                     <li>id: ${movie.id}</li><li>plot: ${movie.plot}</li><li>poster: ${movie.poster}</li><li>rating: ${movie.rating}</li>
                     <li>year: ${movie.year}</li><button class="remove-btn" data-id="${movie.id}">DELETE</button><br>`
-
             }));
             $("#movie-list").append(html);
         }).then(() => {
@@ -38,7 +37,34 @@ function displayMovies() {
             }).then(response => console.log(response.json()))
                 .then(displayMovies);
         })
+        //EDIT FUNCTIONALITY
+    }).then(() =>{
+        $("#submit-edit").click(function(e){
+            e.preventDefault();
+            let id = $('#id-edit').val();
+            let title = $('#input-edit').val();
+            let genre = $('#genre-edit').val();
+            let director = $('#director-edit').val();
+            console.log(id)
+//EDITING FROM THE MOVIE ID.
+            fetch(`https://wool-near-impulse.glitch.me/movies/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    id: id,
+                    title: title,
+                    genre: genre,
+                    director: director
+                }),
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            })
+                // .then(response => console.log(response.json()))
+                // .then(json => console.log(json))
+        })
+
     })
+
 }
 
 displayMovies();
@@ -69,5 +95,26 @@ submit.click(function (e) {
         })
         .then(displayMovies);
 })
-
-
+// $("#submit-edit").click(function(e){
+//     e.preventDefault();
+//     let id = $('#id-edit').val();
+//     let title = $('#input-edit').val();
+//     let genre = $('#genre-edit').val();
+//     let director = $('#director-edit').val();
+//     console.log(id)
+//
+//     fetch(url, {
+//         method: 'PUT',
+//         body: JSON.stringify({
+//             id: id,
+//             title: title,
+//             genre: genre,
+//             director: director
+//         }),
+//         headers: {
+//             'Content-Type': 'application/json; charset=UTF-8',
+//         },
+//         })
+//         .then(response => console.log(response.json()))
+//         .then(json => console.log(json))
+// })
