@@ -7,6 +7,9 @@ const optionsGet = {
     }
 }
 
+let submit = $("#submit");
+let remove = $("#remove-btn5");
+
 function displayMovies(){
     fetch(url, optionsGet)
         .then(response => response.json())
@@ -14,9 +17,15 @@ function displayMovies(){
             let html="";
             console.log(movies);
             movies.forEach((movie => {
-                html += `<li>${movie.actors}</li><li>${movie.director}</li><li>${movie.genre}</li>
-                    <li>${movie.id}</li><li>${movie.plot}</li><li>${movie.poster}</li><li>${movie.rating}</li>
-                    <li>${movie.title}</li><li>${movie.year}</li>`;
+                html += `<li>title: ${movie.title}</li><li>genre: ${movie.genre}</li><li>director: ${movie.director}</li><li>actors: ${movie.actors}</li>
+                    <li>id: ${movie.id}</li><li>plot: ${movie.plot}</li><li>poster: ${movie.poster}</li><li>rating: ${movie.rating}</li>
+                    <li>year: ${movie.year}</li><button id=${movie.id} class="deletesumnth">Remove</button><br>`;
+                $(".deletesumnth").on("click", function removeMovie (e) {
+                    e.preventDefault();
+                    fetch(`https://wool-near-impulse.glitch.me/${movie.id}`, {
+                        method: 'DELETE'
+                    }).then(response => console.log(response.json()))
+                })
             }));
             $("#movie-list").append(html);
         }).then(()=>{
@@ -26,17 +35,33 @@ function displayMovies(){
 }
 displayMovies();
 
-$("#submit").click(function(){
-    const optionsPost = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify($("#input").val())
-    }
-    fetch(url,optionsPost)
-        .then(response => console.log(response))
-        .catch( error => console.error(error) );
 
-    console.log($("#input").val())
+
+submit.click(function(e){
+    e.preventDefault();
+    let title = $('#input').val();
+    let genre = $('#genre').val();
+    let director = $('#director').val();
+    console.log(title);
+
+    fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                title: title,
+                genre: genre,
+                director: director
+            }),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+    })
+        .then(response => console.log(response.json()))
+        .then(json => console.log(json))
+        .then(()=>{
+            $("#loading-screen").removeClass("d-block").addClass("d-none");
+            $("#movies-container").removeClass("d-none").addClass("d-block");
+        })
+        .then(displayMovies);
 })
+
+
