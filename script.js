@@ -45,6 +45,11 @@ function displayMovies() {
             let title = $('#input-edit').val();
             let genre = $('#genre-edit').val();
             let director = $('#director-edit').val();
+            let actor = $('#actor-edit').val();
+            let plot= $('#plot-edit').val();
+            let poster= $('#poster').val();
+            let rating= $('#rating').val();
+            let year= $('#year-edit').val();
             console.log(id)
 //EDITING FROM THE MOVIE ID.
             fetch(`https://wool-near-impulse.glitch.me/movies/${id}`, {
@@ -53,7 +58,12 @@ function displayMovies() {
                     id: id,
                     title: title,
                     genre: genre,
-                    director: director
+                    director: director,
+                    actors: actor,
+                    plot:plot,
+                    poster:poster,
+                    rating:rating,
+                    year:year
                 }),
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8',
