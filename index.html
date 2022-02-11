@@ -36,12 +36,19 @@
 </div>
 
 <div id="movies-container" class="container d-none">
+    <div id="sort-container">
+        <label for="sort-type">Sort by:</label>
+        <select name="sort-type" id="sort-type">
+            <option value="rating">Rating</option>
+            <option value="title">Title</option>
+        </select>
+    </div>
     <div id="movie-list"></div>
 </div>
 <form>
     <label for="input">Movie: </label><input id="input" type="text" placeholder="Title of movie">
-    <label for="genre">Movie: </label><input id="genre" type="text" placeholder="Title of movie">
-    <label for="director">Movie: </label><input id="director" type="text" placeholder="Title of movie">
+    <label for="genre">Movie: </label><input id="genre" type="text" placeholder="Genre">
+    <label for="director">Movie: </label><input id="director" type="text" placeholder="Director">
     <button id="submit">Submit</button>
 </form>
 
