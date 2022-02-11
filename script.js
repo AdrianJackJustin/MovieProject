@@ -47,8 +47,8 @@ function displayMovies() {
             let director = $('#director-edit').val();
             let actor = $('#actor-edit').val();
             let plot= $('#plot-edit').val();
-            let poster= $('#poster').val();
-            let rating= $('#rating').val();
+            let poster= $('#poster-edit').val();
+            let rating= $('#rating-edit').val();
             let year= $('#year-edit').val();
             console.log(id)
 //EDITING FROM THE MOVIE ID.
