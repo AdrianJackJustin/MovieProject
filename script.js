@@ -25,8 +25,9 @@ function displayMovies() {
         }).then(() => {
         $("#loading-screen").removeClass("d-block").addClass("d-none");
         $("#movies-container").removeClass("d-none").addClass("d-block");
-    }).then(() => {
-        $(".remove-btn").on("click", function (e) {
+    })
+        .then(() => {
+        $(".remove-btn").click(function(e){
             e.preventDefault();
 
             let id = $(this).attr("data-id");
@@ -37,9 +38,11 @@ function displayMovies() {
             }).then(response => console.log(response.json()))
                 .then(displayMovies);
         })
-        //EDIT FUNCTIONALITY
-    }).then(() =>{
-        $("#submit-edit").click(function(e){
+
+    })
+        //EDIT FUNCTION---------------------------------------------------------
+        .then(() =>{
+        $("#submit-edit").click((e)=>{
             e.preventDefault();
             let id = $('#id-edit').val();
             let title = $('#input-edit').val();
@@ -51,7 +54,7 @@ function displayMovies() {
             let rating= $('#rating-edit').val();
             let year= $('#year-edit').val();
             console.log(id)
-//EDITING FROM THE MOVIE ID.
+    //EDITING OBJECT BY GRABBING FROM USER INPUT FOR THE MOVIE ID.
             fetch(`https://wool-near-impulse.glitch.me/movies/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({
@@ -69,16 +72,12 @@ function displayMovies() {
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
             })
-                // .then(response => console.log(response.json()))
-                // .then(json => console.log(json))
         })
-
     })
-
 }
 
 displayMovies();
-
+//-------------------------------------------------------------------------------------------------
 submit.click(function (e) {
     e.preventDefault();
     let title = $('#input').val();
@@ -105,26 +104,3 @@ submit.click(function (e) {
         })
         .then(displayMovies);
 })
-// $("#submit-edit").click(function(e){
-//     e.preventDefault();
-//     let id = $('#id-edit').val();
-//     let title = $('#input-edit').val();
-//     let genre = $('#genre-edit').val();
-//     let director = $('#director-edit').val();
-//     console.log(id)
-//
-//     fetch(url, {
-//         method: 'PUT',
-//         body: JSON.stringify({
-//             id: id,
-//             title: title,
-//             genre: genre,
-//             director: director
-//         }),
-//         headers: {
-//             'Content-Type': 'application/json; charset=UTF-8',
-//         },
-//         })
-//         .then(response => console.log(response.json()))
-//         .then(json => console.log(json))
-// })
