@@ -6,20 +6,19 @@ const optionsGet = {
     }
 }
 
-let submit = $("#submit");
+const submit = $("#submit");
+const movieList = $("#movie-list");
 
 function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
 wait(1000).then(displayMovies);
 
-function displayMovies() {
-    fetch(url, optionsGet)
-        .then(response => response.json())
-        .then(movies => {
-            let html = "";
-            movies.forEach((movie => {
-                html += `<div class="card">
+function buildHTML(moviesArr){
+    let html = "";
+    moviesArr.forEach((movie => {
+        html += `<div class="card">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" style="height: 100px; width: 100px" alt="...">poster: ${movie.poster}</img>
                             <div class="card-body">
                             <h5 class="card-title">title: ${movie.title}</h5>
@@ -27,7 +26,14 @@ function displayMovies() {
                             <button class="remove-btn btn-primary" data-id="${movie.id}">DELETE</button>
                             </div>
                         </div>`
-            }));
+    }));
+    return html
+}
+
+function displayMovies() {
+    fetch(url, optionsGet)
+        .then(response => response.json())
+        .then(movies => {
             // <li></li>
             // <li>genre: ${movie.genre}</li>
             // <li>director: ${movie.director}</li>
@@ -39,8 +45,10 @@ function displayMovies() {
             // <li>year: ${movie.year}</li>
             // <button className="remove-btn" data-id="${movie.id}">DELETE</button>
             // <br>
-            $("#movie-list").empty();
-            $("#movie-list").append(html);
+
+            let html = buildHTML(movies);
+            movieList.empty();
+            movieList.append(html);
         }).then(() => {
         $("#loading-screen").removeClass("d-block").addClass("d-none");
         $("#movies-container").removeClass("d-none").addClass("d-block");
@@ -49,13 +57,11 @@ function displayMovies() {
             $(".remove-btn").click(function (e) {
                 e.preventDefault();
                 let id = $(this).attr("data-id");
-
                 fetch(`https://wool-near-impulse.glitch.me/movies/${id}`, {
                     method: 'DELETE'
                 }).then(response => console.log(response.json()))
                     .then(displayMovies);
             })
-
         })
         // SORT BUTTON
         .then(() => {
@@ -69,22 +75,11 @@ function displayMovies() {
                         if(sortType === "rating"){
                             sortedMovies = movies.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1);
                         } else {
-                            sortedMovies = movies.sort((a, b) => a[sortType] > b[sortType] ? 1 : -1);
+                            sortedMovies = movies.sort((a, b) => a[sortType].toLowerCase() > b[sortType].toLowerCase() ? 1 : -1);
                         }
-                        let html = "";
-                        //console.log(movies);
-                        sortedMovies.forEach((movie => {
-                            html += `<div class="card">
-                            <img src="${movie.poster}" class="card-img-top" alt="movie poster">
-                            <div class="card-body">
-                            <h5 class="card-title">title: ${movie.title}</h5>
-                            <p class="card-text">director: ${movie.director}<br>rating: ${movie.rating}<br>year: ${movie.year}</p>
-                            <button class="remove-btn btn-primary" data-id="${movie.id}">DELETE</button>
-                            </div>
-                        </div>`
-                        }));
-                        $("#movie-list").empty();
-                        $("#movie-list").append(html);
+                        let html = buildHTML(sortedMovies);
+                        movieList.empty();
+                        movieList.append(html);
                     });
             });
         })
@@ -120,33 +115,32 @@ function displayMovies() {
                     'Content-Type': 'application/json; charset=UTF-8',
                 }
             }).then(displayMovies);
-
-        })
-    })
+        });
+    });
 }
 //-------------------------------------------------------------------------------------------------
-    submit.click(function (e) {
-        e.preventDefault();
-        let title = $('#input').val();
-        let genre = $('#genre').val();
-        let director = $('#director').val();
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({
-                title: title,
-                genre: genre,
-                director: director
-            }),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then(response => console.log(response.json()))
-            .then(json => console.log(json))
-            .then(() => {
-                $("#loading-screen").removeClass("d-block").addClass("d-none");
-                $("#movies-container").removeClass("d-none").addClass("d-block");
-            })
-            .then(displayMovies);
-    })
 
+submit.click(function (e) {
+    e.preventDefault();
+    let title = $('#input').val();
+    let genre = $('#genre').val();
+    let director = $('#director').val();
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+            title: title,
+            genre: genre,
+            director: director
+        }),
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then(response => console.log(response.json()))
+        .then(json => console.log(json))
+        .then(() => {
+            $("#loading-screen").removeClass("d-block").addClass("d-none");
+            $("#movies-container").removeClass("d-none").addClass("d-block");
+        })
+        .then(displayMovies);
+});
