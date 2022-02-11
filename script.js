@@ -15,17 +15,17 @@ function wait(milliseconds) {
 
 wait(1000).then(displayMovies);
 
-function buildHTML(moviesArr){
+function buildHTML(moviesArr) {
     let html = "";
     moviesArr.forEach((movie => {
-        html += `<div class="card">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" style="height: 100px; width: 100px" alt="...">poster: ${movie.poster}</img>
-                            <div class="card-body">
-                            <h5 class="card-title">title: ${movie.title}</h5>
-                            <p class="card-text">director: ${movie.director}<br>rating: ${movie.rating}<br>year: ${movie.year}</p>
-                            <button class="remove-btn btn-primary" data-id="${movie.id}">DELETE</button>
-                            </div>
-                        </div>`
+        html += `<div class="card rounded">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" style="height: 100px; width: 100px" alt="...">poster: ${movie.poster}</img>
+                    <div class="card-body">
+                        <h5 class="card-title">title: ${movie.title}</h5>
+                        <p class="card-text">director: ${movie.director}<br>rating: ${movie.rating}<br>year: ${movie.year}</p>
+                        <button class="remove-btn btn-primary" data-id="${movie.id}">DELETE</button>
+                    </div>
+                 </div>`
     }));
     return html
 }
@@ -45,7 +45,6 @@ function displayMovies() {
             // <li>year: ${movie.year}</li>
             // <button className="remove-btn" data-id="${movie.id}">DELETE</button>
             // <br>
-
             let html = buildHTML(movies);
             movieList.empty();
             movieList.append(html);
