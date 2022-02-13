@@ -144,19 +144,24 @@ submit.click(function (e) {
         .then(displayMovies);
 });
 // --------------FILTER ID SEARCH-------------------------
+// --------------FILTER ID SEARCH-------------------------
 //page blank after search
 $("#id-edit").on("keyup",function(){
     fetch(url, optionsGet)
         .then(response => response.json())
         .then(movies => {
             let value = $(this).val()
-            // console.log("value", value)
-            // console.log(movies)
-            let filteredMovies = movies.filter(newMovie => {
-                return value.includes(newMovie.id)
-            });
-            // console.log(filteredMovies)
-            let html = buildHTML(filteredMovies);
-            movieList.html(html)
+            if(value === ""){
+                displayMovies();
+            } else {
+                // console.log("value", value)
+                // console.log(movies)
+                let filteredMovies = movies.filter(newMovie => {
+                    return value.includes(newMovie.id)
+                });
+                // console.log(filteredMovies)
+                let html = buildHTML(filteredMovies);
+                movieList.html(html)
+            }
         })
 })

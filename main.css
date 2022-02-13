@@ -77,3 +77,27 @@ body {
     margin: 2em 0;
     border: slategray solid 2px;
 }
+
+/*edit container*/
+.searchbar{
+    /*margin-bottom: auto;*/
+    /*margin-top: auto;*/
+    height: auto;
+    background-color: lightgray;
+    border-radius: .5em;
+    padding: 1em;
+}
+.search_input{
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    /*line-height: 40px;*/
+    transition: width 2s linear;
+}
+.searchbar:hover > .search_input{
+    /*padding: 0 10px;*/
+    width: 450px;
+    caret-color:red;
+    transition: width 1s linear;
+}

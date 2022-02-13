@@ -15,8 +15,6 @@
 <body>
 <h1>Get Movies</h1>
 
-
-
 <div id="loading-screen" class="d-block">
     <div class="center">
         <div class="ring"></div>
@@ -28,19 +26,22 @@
 
 <div id="movies-container" class="container d-none">
     <!--TO EDIT FUNCTION INPUT -->
-    <form>
-        <label for="id-edit">ID: </label><input id="id-edit" type="text" placeholder="Enter ID of movie">
-        <label for="input-edit">Title: </label><input id="input-edit" type="text" placeholder="Edit Title of movie">
-        <label for="genre-edit">Genre: </label><input id="genre-edit" type="text" placeholder="Edit Genre of movie">
-        <label for="director-edit">Director: </label><input id="director-edit" type="text" placeholder="Edit Director of movie">
-        <label for="actor-edit">Actor: </label><input id="actor-edit" type="text" placeholder="Edit actor of movie">
-        <label for="plot-edit">Plot: </label><input id="plot-edit" type="text" placeholder="Edit plot of movie">
-        <label for="poster-edit">Poster: </label><input id="poster-edit" type="text" placeholder="Edit poster of movie">
-        <label for="rating-edit">Rating: </label><input id="rating-edit" type="text" placeholder="Edit rating of movie">
-        <label for="year-edit">Year: </label><input id="year-edit" type="text" placeholder="Edit year of movie">
-        <button id="submit-edit">Submit Edit</button>
-    </form>
-
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100 m-5">
+            <div class="searchbar">
+                <input id="id-edit" type="text" class="search_input" style="color: white" placeholder="Enter ID">
+                <input id="input-edit" type="text" class="search_input" placeholder="Edit Title">
+                <input id="genre-edit" type="text" class="search_input" placeholder="Edit Genre">
+                <input id="director-edit" type="text" class="search_input" placeholder="Edit Director">
+                <input id="actor-edit" type="text" class="search_input" placeholder="Edit actor">
+                <input id="plot-edit" type="text" class="search_input" placeholder="Edit plot">
+                <input id="poster-edit" type="text" class="search_input" placeholder="Edit poster">
+                <input id="rating-edit" type="text" class="search_input" placeholder="Edit rating">
+                <input id="year-edit" type="text" class="search_input" placeholder="Edit year">
+                            <button id="submit-edit" class="btn-secondary btn">Edit</button>
+            </div>
+        </div>
+    </div>
     <div id="sort-container">
         <label for="sort-type">Sort by:</label>
         <select name="sort-type" id="sort-type">
@@ -57,6 +58,7 @@
         <button id="submit">Submit</button>
     </form>
 </div>
+
 
 
 
