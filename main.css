@@ -78,10 +78,8 @@ body {
     border: slategray solid 2px;
 }
 
-/*edit container*/
+/*-----add/edit button-----*/
 .searchbar{
-    /*margin-bottom: auto;*/
-    /*margin-top: auto;*/
     height: auto;
     background-color: lightgray;
     border-radius: .5em;
@@ -92,12 +90,11 @@ body {
     outline: 0;
     background: none;
     width: 0;
-    /*line-height: 40px;*/
-    transition: width 2s linear;
+    transition: 0.9s linear;
 }
 .searchbar:hover > .search_input{
-    /*padding: 0 10px;*/
-    width: 450px;
+    width: 4em;
     caret-color:red;
-    transition: width 1s linear;
+    transition: 1.4s linear;
 }
+/*---------------------------------*/

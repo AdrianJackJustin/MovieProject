@@ -25,23 +25,18 @@
 </div>
 
 <div id="movies-container" class="container d-none">
-    <!--TO EDIT FUNCTION INPUT -->
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100 m-5">
-            <div class="searchbar">
-                <input id="id-edit" type="text" class="search_input" style="color: white" placeholder="Enter ID">
-                <input id="input-edit" type="text" class="search_input" placeholder="Edit Title">
-                <input id="genre-edit" type="text" class="search_input" placeholder="Edit Genre">
-                <input id="director-edit" type="text" class="search_input" placeholder="Edit Director">
-                <input id="actor-edit" type="text" class="search_input" placeholder="Edit actor">
-                <input id="plot-edit" type="text" class="search_input" placeholder="Edit plot">
-                <input id="poster-edit" type="text" class="search_input" placeholder="Edit poster">
-                <input id="rating-edit" type="text" class="search_input" placeholder="Edit rating">
-                <input id="year-edit" type="text" class="search_input" placeholder="Edit year">
-                            <button id="submit-edit" class="btn-secondary btn">Edit</button>
+<!--ADD MOVIE-------------------------------->
+    <div class="container">
+        <div class="d-flex justify-content-center m-5">
+            <div class="searchbar shadow">
+                <input id="input" type="text" class="search_input" placeholder="Title ">
+                <input id="genre" type="text" class="search_input" placeholder="Genre">
+                <input id="director" type="text" class="search_input" placeholder="Director">
+                <button id="submit" class="btn btn-success text-white">Add</button>
             </div>
         </div>
     </div>
+<!----------------------------------------------->
     <div id="sort-container">
         <label for="sort-type">Sort by:</label>
         <select name="sort-type" id="sort-type">
@@ -50,18 +45,25 @@
         </select>
     </div>
     <div id="movie-list" class="row mx-0"></div>
-
-    <form>
-        <label for="input">Movie: </label><input id="input" type="text" placeholder="Title of movie">
-        <label for="genre">Movie: </label><input id="genre" type="text" placeholder="Genre">
-        <label for="director">Movie: </label><input id="director" type="text" placeholder="Director">
-        <button id="submit">Submit</button>
-    </form>
+    <!--EDIT MOVIE -------->
+    <div class="container">
+        <div class="d-flex justify-content-center m-5">
+            <div class="searchbar shadow">
+                <input id="id-edit" type="text" class="search_input" style="color: white" placeholder="ID">
+                <input id="input-edit" type="text" class="search_input" placeholder="Title">
+                <input id="genre-edit" type="text" class="search_input" placeholder="Genre">
+                <input id="director-edit" type="text" class="search_input" placeholder="Director">
+                <input id="actor-edit" type="text" class="search_input" placeholder="Actor">
+                <input id="plot-edit" type="text" class="search_input" placeholder="Plot">
+                <!--                <input id="poster-edit" type="text" class="search_input" placeholder="Poster">-->
+                <input id="rating-edit" type="text" class="search_input" placeholder="Rating">
+                <input id="year-edit" type="text" class="search_input" placeholder="Year">
+                <button id="submit-edit" class="btn-secondary btn">Edit</button>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------------------->
 </div>
-
-
-
-
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
