@@ -48,6 +48,7 @@ function displayMovies() {
             let html = buildHTML(movies);
             movieList.empty();
             movieList.append(html);
+            getPosters();
         }).then(() => {
         $("#loading-screen").removeClass("d-block").addClass("d-none");
         $("#movies-container").removeClass("d-none").addClass("d-block");
@@ -79,6 +80,7 @@ function displayMovies() {
                         let html = buildHTML(sortedMovies);
                         movieList.empty();
                         movieList.append(html);
+                        getPosters();
                     });
             });
         })
@@ -143,7 +145,7 @@ submit.click(function (e) {
         })
         .then(displayMovies);
 });
-// --------------FILTER ID SEARCH-------------------------
+
 // --------------FILTER ID SEARCH-------------------------
 //page blank after search
 $("#id-edit").on("keyup",function(){
@@ -162,6 +164,24 @@ $("#id-edit").on("keyup",function(){
                 // console.log(filteredMovies)
                 let html = buildHTML(filteredMovies);
                 movieList.html(html)
+                getPosters();
             }
         })
 })
+
+// Retrieve movie posters from omdb api and apply to movie cards
+function getPosters(){
+    let titleTags = document.querySelectorAll("#movie-list .card-body .card-title");  // look for the h5 elems that contain the title
+    for(let titleTag of titleTags){
+        let movieTitle = titleTag.innerText.substring(7)  // removes "title: "  from h5 text. leaves us with actual movie title only
+        // Fetch request for movie posters through omdb api
+        fetch("http://www.omdbapi.com/?t=" + movieTitle + `&apikey=${MOVIE_KEY}`, {
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(movieData => {
+                let imgTag = titleTag.parentElement.parentElement.getElementsByTagName("img")[0];
+                imgTag.src = movieData.Poster;
+            })
+    }
+}
