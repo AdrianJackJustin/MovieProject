@@ -8,12 +8,14 @@
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <!--    css file-->
+    <!-- css file-->
     <link href="main.css" rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
     <title>Movie Project</title>
+
 </head>
 <body>
-<h1>Get Movies</h1>
+<h1 class="logo">CINEMAFILE</h1>
 
 <div id="loading-screen" class="d-block">
     <div class="center">
@@ -44,7 +46,19 @@
             <option value="title">Title</option>
         </select>
     </div>
-    <div id="movie-list" class="row mx-0"></div>
+
+<!--    slider and controllers-->
+    <div class="bucket">
+        <button type="button" id="moveLeft" class="btn-nav">
+            ᐊ
+        </button>
+
+            <div id="movie-list" class="slider"></div>
+
+        <button type="button" id="moveRight" class="btn-nav">
+            ᐅ
+        </button>
+    </div>
     <!--EDIT MOVIE -------->
     <div class="container">
         <div class="d-flex justify-content-center m-5">
