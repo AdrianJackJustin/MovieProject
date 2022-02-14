@@ -1,6 +1,7 @@
 /** LOGO
 *********************************/
 .logo {
+    padding: 1em;
     color: red;
     font-size: 4rem;
     text-align: center;
@@ -25,6 +26,7 @@
     position: relative;
     padding-top: calc(var(--slider-py) - 100px);
     padding-bottom: var(--slider-py);
+    height: 35em;
 }
 /** CARDS
 *********************************/
@@ -34,6 +36,7 @@
     text-align: center;
     align-items: center;
     background-color: #000;
+
 }
 
 .movie {
@@ -55,17 +58,23 @@
     height: 100%;
     width: 100%;
     border-radius: 10px;
+
 }
 .card-body {
     position: absolute;
     display: none;
     z-index: 9999;
-    background-color: #000;
+    /*background-color: #000;*/
+    background: hsla(0,0%,100%,.06) ;
+    backdrop-filter: blur(1em);
     width: calc(var(--movie-width) - 5px);
-    margin-top: -10px;
+    /*width: 100%;*/
+    /*margin-top: -10px;*/
     padding: 10px 0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    /*border-radius: .3em;*/
+
 }
 /* Make description visible when movie is hovered */
 .movie:hover > .card-body {
@@ -157,8 +166,10 @@
 }
 /*-----add/edit button-----*/
 .searchbar{
+    position: absolute;
     height: auto;
-    background-color: lightgray;
+    background: hsla(0,0%,1%,.06) ;
+    backdrop-filter: blur(10em);
     border-radius: .5em;
     padding: 1em;
 }
@@ -172,6 +183,48 @@
 .searchbar:hover > .search_input{
     width: 4em;
     caret-color:red;
-    transition: 1.4s linear;
+    transition: .4s linear;
 }
-/*---------------------------------*/
+#sort-type, #genre-select{
+    position: relative;
+    background: hsla(0,0%,100%,.06) ;
+    border: none;
+}
+/*----------Small Screen-----------------------*/
+@media screen and (max-width:767px){
+    span{
+        font-size: 1.85em;
+    }
+    .searchbar{
+        padding: .3em;
+    }
+    #sort-container{
+        font-size: .7em;
+    }
+}
+/*-----------------------------------------------*/
+body{
+    height: 100vh;
+    width: 100%;
+    /*background-color: #262626;*/
+    background: linear-gradient(45deg,black, rgba(1, 65, 1, 0.47),
+    #26558c, rgba(2, 2, 59, 0.35), rgba(0, 0, 0, 0.36));
+    background-size: 2000% 2000% ;
+    animation: gradient 60s ease-in-out infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 10% ;
+    }
+
+    100% {
+        background-position: 100% 0% ;
+    }
+}
+ select,body{
+    color: white;
+}

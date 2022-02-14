@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<h1 class="logo">CINEMAFILE</h1>
+
 
 <div id="loading-screen" class="d-block">
     <div class="center">
@@ -27,6 +27,7 @@
 </div>
 
 <div id="movies-container" class="container d-none">
+    <h1 class="logo" data-tilt data-tilt-full-page-listening>CINEMAFILE</h1>
 <!--ADD MOVIE-------------------------------->
     <div class="container">
         <div class="d-flex justify-content-center m-5">
@@ -74,7 +75,7 @@
     </div>
     <!--EDIT MOVIE -------->
     <div class="container">
-        <div class="d-flex justify-content-center m-5">
+        <div class="d-flex justify-content-center">
             <div class="searchbar shadow">
                 <input id="id-edit" type="text" class="search_input" placeholder="ID">
                 <input id="input-edit" type="text" class="search_input" placeholder="Title">
@@ -85,7 +86,7 @@
                 <!--                <input id="poster-edit" type="text" class="search_input" placeholder="Poster">-->
                 <input id="rating-edit" type="text" class="search_input" placeholder="Rating">
                 <input id="year-edit" type="text" class="search_input" placeholder="Year">
-                <button id="submit-edit" class="btn-secondary btn">Edit</button>
+                <button id="submit-edit" class="btn-light btn text-success">Edit</button>
             </div>
         </div>
     </div>
@@ -104,5 +105,7 @@
 <script src="../keys.js"></script>
 <!--custom script-->
 <script src="../src/script.js"></script>
+<!--vanilla-tilt-->
+<script src="/src/vanilla-tilt.js"></script>
 </body>
 </html>

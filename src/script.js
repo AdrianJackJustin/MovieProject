@@ -12,9 +12,7 @@ const movieList = $("#movie-list");
 function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
 wait(1500).then(displayMovies);
-
 function buildHTML(moviesArr) {
     let html = "";
     moviesArr.forEach((movie => {
@@ -29,22 +27,10 @@ function buildHTML(moviesArr) {
     }));
     return html
 }
-
 function displayMovies() {
     fetch(url, optionsGet)
         .then(response => response.json())
         .then(movies => {
-            // <li></li>
-            // <li>genre: ${movie.genre}</li>
-            // <li>director: ${movie.director}</li>
-            // <li>actors: ${movie.actors}</li>
-            // <li>id: ${movie.id}</li>
-            // <li>plot: ${movie.plot}</li>
-            // <li>poster: ${movie.poster}</li>
-            // <li>rating: ${movie.rating}</li>
-            // <li>year: ${movie.year}</li>
-            // <button className="remove-btn" data-id="${movie.id}">DELETE</button>
-            // <br>
             let html = buildHTML(movies);
             movieList.empty();
             movieList.append(html);
@@ -78,10 +64,7 @@ function displayMovies() {
                         } else if (sortType === "title"){
                             sortedMovies = movies.sort((a, b) => a[sortType].toLowerCase() > b[sortType].toLowerCase() ? 1 : -1);
                         }
-
                         let sortedAndFilteredMovies = [];
-
-
                         if(selectedGenre === "all"){
                             let html = buildHTML(sortedMovies);
                             movieList.empty();
@@ -97,11 +80,6 @@ function displayMovies() {
                             getPosters();
                         }
                     });
-
-                // let titleTags = document.querySelectorAll("#movie-list .card-body .card-title");
-
-
-
             });
         })
         //EDIT FUNCTION---------------------------------------------------------
@@ -140,7 +118,6 @@ function displayMovies() {
     });
 }
 //-------------------------------------------------------------------------------------------------
-
 submit.click(function (e) {
     e.preventDefault();
     let title = $('#input').val();
@@ -170,7 +147,6 @@ submit.click(function (e) {
         })
         .then(displayMovies);
 });
-
 // --------------FILTER ID SEARCH-------------------------
 //page blank after search
 $("#id-edit").on("keyup",function(){
@@ -181,12 +157,9 @@ $("#id-edit").on("keyup",function(){
             if(value === ""){
                 displayMovies();
             } else {
-                // console.log("value", value)
-                // console.log(movies)
                 let filteredMovies = movies.filter(newMovie => {
                     return value.includes(newMovie.id)
                 });
-                // console.log(filteredMovies)
                 let html = buildHTML(filteredMovies);
                 movieList.html(html)
                 getPosters();
