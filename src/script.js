@@ -171,7 +171,7 @@ $("#id-edit").on("keyup",function(){
 function getPosters(){
     let titleTags = document.querySelectorAll("#movie-list .card-body .card-title");  // look for the h5 elems that contain the title
     for(let titleTag of titleTags){
-        let movieTitle = titleTag.innerText // removes "title: "  from h5 text. leaves us with actual movie title only
+        let movieTitle = titleTag.innerText
         // Fetch request for movie posters through omdb api
         fetch("http://www.omdbapi.com/?t=" + movieTitle + `&apikey=${MOVIE_KEY}`, {
             method: "GET"
@@ -211,7 +211,7 @@ let activeIndex = 0; // the current page on the slider
 $("#moveLeft").on("click", (e) => {
     let movieWidth = document.querySelector(".movie").getBoundingClientRect()
         .width;
-    let scrollDistance = movieWidth * 5; // Scroll the length of 6 movies.
+    let scrollDistance = movieWidth * 5; // Scroll the length of 5 movies.
     slider.scrollBy({
         top: 0,
         left: -scrollDistance,
@@ -224,7 +224,7 @@ $("#moveLeft").on("click", (e) => {
 $("#moveRight").on("click", (e) => {
     let movieWidth = document.querySelector(".movie").getBoundingClientRect()
         .width;
-    let scrollDistance = movieWidth * 5; // Scroll the length of 6 movies.
+    let scrollDistance = movieWidth * 5; // Scroll the length of 5 movies.
     slider.scrollBy({
         top: 0,
         left: +scrollDistance,
