@@ -229,3 +229,33 @@ $("#genre-select").change(function(){
             }
         })
 })
+
+
+const slider = document.querySelector(".slider");
+let activeIndex = 0; // the current page on the slider
+
+// Scroll Left button
+$("#moveLeft").on("click", (e) => {
+    let movieWidth = document.querySelector(".movie").getBoundingClientRect()
+        .width;
+    let scrollDistance = movieWidth * 5; // Scroll the length of 6 movies.
+    slider.scrollBy({
+        top: 0,
+        left: -scrollDistance,
+        behavior: "smooth",
+    });
+    activeIndex = (activeIndex - 1) % 3;
+});
+
+// Scroll Right button
+$("#moveRight").on("click", (e) => {
+    let movieWidth = document.querySelector(".movie").getBoundingClientRect()
+        .width;
+    let scrollDistance = movieWidth * 5; // Scroll the length of 6 movies.
+    slider.scrollBy({
+        top: 0,
+        left: +scrollDistance,
+        behavior: "smooth",
+    });
+    activeIndex = (activeIndex + 1) % 3;
+});
