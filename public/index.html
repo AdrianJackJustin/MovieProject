@@ -34,6 +34,8 @@
                 <input id="input" type="text" class="search_input" placeholder="Title ">
                 <input id="genre" type="text" class="search_input" placeholder="Genre">
                 <input id="director" type="text" class="search_input" placeholder="Director">
+                <input id="rating" type="text" class="search_input" placeholder="Rating">
+                <input id="year" type="text" class="search_input" placeholder="Year">
                 <button id="submit" class="btn btn-success text-white">Add</button>
             </div>
         </div>
@@ -41,9 +43,20 @@
 <!----------------------------------------------->
     <div id="sort-container">
         <label for="sort-type">Sort by:</label>
-        <select name="sort-type" id="sort-type">
+        <select name="sort-type" id="sort-type" class="mr-3">
             <option value="rating">Rating</option>
             <option value="title">Title</option>
+        </select>
+
+        <label for="genre-select">Genre:</label>
+        <select name="genre-select" id="genre-select">
+            <option value="all">All</option>
+            <option value="action">Action</option>
+            <option value="crime">Crime</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+            <option value="sci-fi">Sci-Fi</option>
+            <option value="war">War</option>
         </select>
     </div>
 
@@ -63,7 +76,7 @@
     <div class="container">
         <div class="d-flex justify-content-center m-5">
             <div class="searchbar shadow">
-                <input id="id-edit" type="text" class="search_input" style="color: white" placeholder="ID">
+                <input id="id-edit" type="text" class="search_input" placeholder="ID">
                 <input id="input-edit" type="text" class="search_input" placeholder="Title">
                 <input id="genre-edit" type="text" class="search_input" placeholder="Genre">
                 <input id="director-edit" type="text" class="search_input" placeholder="Director">

@@ -21,8 +21,8 @@ function buildHTML(moviesArr) {
         html += `<div class="card movie">
                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" alt="...">${movie.poster}</img>
                     <div class="card-body">
-                        <h5 class="card-title">title: ${movie.title}</h5>
-                        <p class="card-text">director: ${movie.director}<br>rating: ${movie.rating}<br>year: ${movie.year}</p>
+                        <h5 class="card-title">${movie.title}</h5>
+                        <p class="card-text">Director: ${movie.director}<br>Rating: ${movie.rating}<br>Year: ${movie.year}<br>Movie Id: ${movie.id}</p>
                         <button class="remove-btn btn-primary" data-id="${movie.id}">DELETE</button>
                     </div>
                  </div>`
@@ -68,20 +68,40 @@ function displayMovies() {
             $("#sort-type").change(function (e) {
                 console.log(this.value);
                 let sortType = this.value;
+                let selectedGenre = $("#genre-select").val().toLowerCase();
                 fetch(url, optionsGet)
                     .then(response => response.json())
                     .then(movies => {
                         let sortedMovies = [];
                         if(sortType === "rating"){
                             sortedMovies = movies.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1);
-                        } else {
+                        } else if (sortType === "title"){
                             sortedMovies = movies.sort((a, b) => a[sortType].toLowerCase() > b[sortType].toLowerCase() ? 1 : -1);
                         }
-                        let html = buildHTML(sortedMovies);
-                        movieList.empty();
-                        movieList.append(html);
-                        getPosters();
+
+                        let sortedAndFilteredMovies = [];
+
+
+                        if(selectedGenre === "all"){
+                            let html = buildHTML(sortedMovies);
+                            movieList.empty();
+                            movieList.append(html);
+                            getPosters();
+                        } else {
+                            sortedAndFilteredMovies = sortedMovies.filter(movie => {
+                                return movie.genre.toLowerCase().includes(selectedGenre)
+                            })
+                            let html = buildHTML(sortedAndFilteredMovies);
+                            movieList.empty();
+                            movieList.append(html);
+                            getPosters();
+                        }
                     });
+
+                // let titleTags = document.querySelectorAll("#movie-list .card-body .card-title");
+
+
+
             });
         })
         //EDIT FUNCTION---------------------------------------------------------
@@ -126,12 +146,17 @@ submit.click(function (e) {
     let title = $('#input').val();
     let genre = $('#genre').val();
     let director = $('#director').val();
+    let year = $('#year').val();
+    let rating = $('#rating').val();
     fetch(url, {
         method: 'POST',
         body: JSON.stringify({
             title: title,
             genre: genre,
-            director: director
+            director: director,
+            rating: rating,
+            year: year,
+            poster: ""
         }),
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -173,7 +198,7 @@ $("#id-edit").on("keyup",function(){
 function getPosters(){
     let titleTags = document.querySelectorAll("#movie-list .card-body .card-title");  // look for the h5 elems that contain the title
     for(let titleTag of titleTags){
-        let movieTitle = titleTag.innerText.substring(7)  // removes "title: "  from h5 text. leaves us with actual movie title only
+        let movieTitle = titleTag.innerText // removes "title: "  from h5 text. leaves us with actual movie title only
         // Fetch request for movie posters through omdb api
         fetch("http://www.omdbapi.com/?t=" + movieTitle + `&apikey=${MOVIE_KEY}`, {
             method: "GET"
@@ -185,3 +210,22 @@ function getPosters(){
             })
     }
 }
+
+// Show movies based on genre
+$("#genre-select").change(function(){
+    fetch(url, optionsGet)
+        .then(response => response.json())
+        .then(movies => {
+            let selectedGenre = $(this).val().toLowerCase();
+            if(selectedGenre === "all"){
+                displayMovies();
+            } else {
+                let filteredMovies = movies.filter(movie => {
+                    return movie.genre.toLowerCase().includes(selectedGenre)
+                });
+                let html = buildHTML(filteredMovies);
+                movieList.html(html)
+                getPosters();
+            }
+        })
+})
