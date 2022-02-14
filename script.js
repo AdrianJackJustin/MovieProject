@@ -13,13 +13,13 @@ function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-wait(1000).then(displayMovies);
+wait(1500).then(displayMovies);
 
 function buildHTML(moviesArr) {
     let html = "";
     moviesArr.forEach((movie => {
-        html += `<div class="card rounded">
-                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" style="height: 100px; width: 100px" alt="...">poster: ${movie.poster}</img>
+        html += `<div class="card movie">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png" class="card-img-top" alt="...">${movie.poster}</img>
                     <div class="card-body">
                         <h5 class="card-title">title: ${movie.title}</h5>
                         <p class="card-text">director: ${movie.director}<br>rating: ${movie.rating}<br>year: ${movie.year}</p>
